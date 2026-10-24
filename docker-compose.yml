@@ -1,0 +1,15 @@
+services:
+  witmotion:
+    build: .
+    image: witmotion_ros:humble
+    container_name: witmotion
+    restart: unless-stopped        # start on boot, restart if the node exits
+    network_mode: host             # so ROS 2 nodes on the host can see the topics
+    ipc: host                      # needed for DDS shared-memory transport
+    devices:
+      - /dev/ttyTHS1:/dev/ttyTHS1
+    volumes:
+      - ./config:/config:ro        # edit config/wt901.yml, then: docker compose restart
+    environment:
+      - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp

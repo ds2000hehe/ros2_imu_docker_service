@@ -1,0 +1,5 @@
+build/
+install/
+log/
+**/.git
+src/witmotion_ros/witmotion-uart-qt/config/doxygen-awesome
